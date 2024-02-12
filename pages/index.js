@@ -22,7 +22,7 @@ const Home = () => {
   return <div className='bg-primary-/60 h-full'>
     {/* text */}
     <div className='w-full h-full bg-gradient-to-r from-primary/10 via-black/70 to-black/10'>
-      <div className='text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full  container mx-auto md:top-[1px]' >
+      <div className='text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full  container mx-auto' >
     {/* title */}
       <h1 className="h1 bg-black/40 rounded-xl md:text-xl sm:text-base xs:text-base">
       Explorați universul muzicii noastre pline de pasiune,<br/> perfectă pentru a creea {''}
