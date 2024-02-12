@@ -20,7 +20,7 @@ const Contact = () => {
     { /* text & form */}
       <div className='flex flex-col w-full max-w-[700px] '>
         { /* text */}
-        <h2 className='h2 text-center mb-12 xs:text-xs '>
+        <h2 className='h2 text-center mb-12 xs:hidden'>
           Let's <span className='text-accent'>connect.</span>
         </h2>
         { /* form */}
