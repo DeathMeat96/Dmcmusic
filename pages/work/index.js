@@ -24,7 +24,9 @@ const Work = () => {
         className='h2 xl:mt-8 md:text-base sm:text-base xs:text-base'
         >
           My Work <span className='text-accent'>.</span>
+          
         </motion.h2>
+        
         <motion.p 
         variants={fadeIn('up', 0.4)}
         initial='hidden'
