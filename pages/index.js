@@ -24,12 +24,12 @@ const Home = () => {
     <div className='w-full h-full bg-gradient-to-r from-primary/10 via-black/70 to-black/10'>
       <div className='text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full  container mx-auto ' >
     {/* title */}
-      <h1 className="h1 bg-black/40 rounded-xl md:text-xl sm:text-base xs:text-base">
+      <h1 className="h1 bg-black/40 rounded-xl md:text-xl sm:text-base xs:text-base ">
       Explorați universul muzicii noastre pline de pasiune,<br/> perfectă pentru a creea {''}
         <span className='text-accent'>o atmosferă unică și memorabilă.</span>
       </h1>
     {/* Subtitle */}
-      <p className='max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16 bg-black/40 rounded-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nostrum quam reprehenderit vero, tenetur voluptatem nulla aut aspernatur dolores ut.
+      <p className='max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16 bg-black/40 rounded-xl xs:hidden'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque nostrum quam reprehenderit vero, tenetur voluptatem nulla aut aspernatur dolores ut.
       </p>
     {/* Btn */}
       <div className='flex justify-center xl:hidden relative z-40'>
