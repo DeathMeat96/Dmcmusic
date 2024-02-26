@@ -1,4 +1,21 @@
-// components
+import {
+  Button,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Text,
+  Textarea,
+  useToast,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { sendContactForm } from "../lib/api";
+
+const initValues = { name: "", email: "", subject: "", message: "" };
+
+const initState = { isLoading: false, error: "", values: initValues };
 
 
 //icons
@@ -14,58 +31,141 @@ import {motion} from 'framer-motion'
 
 import {fadeIn} from '../../variants'
 
-import {useState} from 'react'
 
-const Contact = () => {
+export default function Contact() {
+  const toast = useToast();
+  const [state, setState] = useState(initState);
+  const [touched, setTouched] = useState({});
 
-const [name, setName] = useState('')
-const [email, setEmail] = useState('')
-const [subject, setSubject] = useState('')
-const [message, setMessage] = useState('')
+  const { values, isLoading, error } = state;
 
-const handleSubmit =async (e) => {
+  const onBlur = ({ target }) =>
+    setTouched((prev) => ({ ...prev, [target.name]: true }));
 
-  e.preventDefault();
+  const handleChange = ({ target }) =>
+    setState((prev) => ({
+      ...prev,
+      values: {
+        ...prev.values,
+        [target.name]: target.value,
+      },
+    }));
 
-  const form = {
-    name,
-    email,
-    subject,
-    message
-  }
+  const onSubmit = async () => {
+    setState((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
+    try {
+      await sendContactForm(values);
+      setTouched({});
+      setState(initState);
+      toast({
+        title: "Message sent.",
+        status: "success",
+        duration: 2000,
+        position: "top",
+      });
+    } catch (error) {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        error: error.message,
+      }));
+    }
+  };
 
-  //submit via api
+  return (
 
-  console.log(form)
-  
-
-}
-
-  return <div className='h-full bg-brimary/30'>
+    <div className='h-full bg-brimary/30'>
     <div className='container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full'>
     { /* text & form */}
       <div className='flex flex-col w-full max-w-[700px] '>
-        { /* text */}
-        <h2 className='h2 text-center mb-12 xs:hidden'>
-          Contact <span className='text-accent'>.</span>
-        </h2>
-        { /* form */}
-        <form className=' flex-1 flex flex-col gap-6 w-ful mx-auto xs:text-lg sm:text-lg' onSubmit={handleSubmit}>
-        { /* group */}
-        <div className='flex gap-x-6 w-full'>
-          <input value={name} onChange={e => setName(e.target.value)} type='text' placeholder='name' className='input' />
-          <input value={email} onChange={e => setEmail(e.target.value)} type='text' placeholder='email' className='input' />
-        </div>
-        <input value={subject} onChange={e => setSubject(e.target.value)} type='text' placeholder='subject' className='input xs:h-[60px]' />
-        <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder='message' className='textarea xs:h-[100px]'></textarea>
-        <button className='btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group'>
-          <span className='group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500'>Let's Talk</span>
-          <BsArrowRight className='-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]'/>
-        </button>
-        </form>
-      </div>
-    </div>
-  </div>;
-};
+    <Container maxW="450px" mt={12}>
+      <Heading className="xs:hidden">Contact</Heading>
+      {error && (
+        <Text color="red.300" my={4} fontSize="xl">
+          {error}
+        </Text>
+      )}
 
-export default Contact;
+      <FormControl isRequired isInvalid={touched.name && !values.name} mb={5}>
+        <FormLabel>Name</FormLabel>
+        <Input
+          type="text"
+          name="name"
+          errorBorderColor="red.300"
+          value={values.name}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+        <FormErrorMessage>Required</FormErrorMessage>
+      </FormControl>
+
+      <FormControl isRequired isInvalid={touched.email && !values.email} mb={5}>
+        <FormLabel>Email</FormLabel>
+        <Input
+          type="email"
+          name="email"
+          errorBorderColor="red.300"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+        <FormErrorMessage>Required</FormErrorMessage>
+      </FormControl>
+
+      <FormControl
+        mb={5}
+        isRequired
+        isInvalid={touched.subject && !values.subject}
+      >
+        <FormLabel>Subject</FormLabel>
+        <Input
+          type="text"
+          name="subject"
+          errorBorderColor="red.300"
+          value={values.subject}
+          onChange={handleChange}
+          onBlur={onBlur}
+        />
+        <FormErrorMessage>Required</FormErrorMessage>
+      </FormControl>
+
+      <FormControl
+        isRequired
+        isInvalid={touched.message && !values.message}
+        mb={5}
+      >
+        <FormLabel>Message</FormLabel>
+        <Textarea
+          type="text"
+          name="message"
+          rows={4}
+          errorBorderColor="red.300"
+          value={values.message}
+          onChange={handleChange}
+          onBlur={onBlur}
+          
+        />
+        <FormErrorMessage>Required</FormErrorMessage>
+      </FormControl>
+
+      <Button
+        className='btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group'
+        
+        isLoading={isLoading}
+        disabled={
+          !values.name || !values.email || !values.subject || !values.message
+        }
+        onClick={onSubmit}
+      >
+        <span className='group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500'>Let's Talk</span>
+        <BsArrowRight className='-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]'/>
+      </Button>
+    </Container>
+    </div>
+    </div>
+    </div>
+  );
+}
