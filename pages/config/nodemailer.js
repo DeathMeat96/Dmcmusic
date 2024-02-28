@@ -1,4 +1,3 @@
-"use server";
 
 import { Server } from "http";
 import nodemailer from "nodemailer";

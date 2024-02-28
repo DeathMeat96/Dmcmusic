@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { sendContactForm } from "../lib/api";
+import { sendContactForm } from "../../lib/api";
 
 const initValues = { name: "", email: "", subject: "", message: "" };
 
@@ -22,14 +22,7 @@ const initState = { isLoading: false, error: "", values: initValues };
 
 import {BsArrowRight} from 'react-icons/bs'
 
-// framer
 
-import {motion} from 'framer-motion'
-
-
-// variants
-
-import {fadeIn} from '../../variants'
 
 
 export default function Contact() {
