@@ -50,7 +50,7 @@ const Home = () => {
     <div className="w-full h-full absolute right-0 bottom-0 xl:mix-blend-soft-light lg:mix-blend-soft-light md:mix-blend-soft-light sm:mix-blend-soft-light xs:mix-blend-soft-light z-10">
       
   {/*BG */}
-  <div className='bg-none xl:bg-explosion xl:bg-cover xl:bg-right xl:bg-no-repeat w-full h-full absolute translate-z-0 lg:bg-explosion lg:bg-cover lg:bg-right lg:bg-no-repeat md:bg-explosion md:bg-cover md:bg-right sm:bg-no-repeat sm:bg-explosion sm:bg-cover sm:bg-right   xs:bg-explosion xs:bg-cover xs:bg-right  xs:bg-no-repeat'></div>
+  <div className='bg-none xl:bg-explosion xl:bg-cover xl:bg-right xl:bg-no-repeat w-full h-full absolute translate-z-0 lg:bg-explosion lg:bg-cover lg:bg-right lg:bg-no-repeat md:bg-explosion md:bg-cover md:bg-right sm:bg-no-repeat sm:bg-explosion sm:bg-cover sm:bg-right xs:bg-explosion xs:bg-cover xs:bg-right xs:bg-[85%] '></div>
     </div>
 </div>;
 };

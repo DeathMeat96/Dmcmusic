@@ -23,8 +23,6 @@ const initState = { isLoading: false, error: "", values: initValues };
 import {BsArrowRight} from 'react-icons/bs'
 
 
-
-
 export default function Contact() {
   const toast = useToast();
   const [state, setState] = useState(initState);
@@ -73,7 +71,7 @@ export default function Contact() {
     <div className='h-full bg-brimary/30'>
     <div className='container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full'>
     { /* text & form */}
-      <div className='flex flex-col w-full max-w-[700px] '>
+      <div className='flex flex-col w-full max-w-[700px] xs:mt-[1px] '>
     <Container maxW="450px" mt={12}>
       <Heading className="xs:hidden">Contact</Heading>
       {error && (
@@ -82,18 +80,7 @@ export default function Contact() {
         </Text>
       )}
 
-      <FormControl isRequired isInvalid={touched.name && !values.name} mb={5}>
-        <FormLabel>Name</FormLabel>
-        <Input
-          type="text"
-          name="name"
-          errorBorderColor="red.300"
-          value={values.name}
-          onChange={handleChange}
-          onBlur={onBlur}
-        />
-        <FormErrorMessage>Required</FormErrorMessage>
-      </FormControl>
+      
 
       <FormControl isRequired isInvalid={touched.email && !values.email} mb={5}>
         <FormLabel>Email</FormLabel>
@@ -105,7 +92,7 @@ export default function Contact() {
           onChange={handleChange}
           onBlur={onBlur}
         />
-        <FormErrorMessage>Required</FormErrorMessage>
+
       </FormControl>
 
       <FormControl
@@ -122,7 +109,7 @@ export default function Contact() {
           onChange={handleChange}
           onBlur={onBlur}
         />
-        <FormErrorMessage>Required</FormErrorMessage>
+  
       </FormControl>
 
       <FormControl
@@ -141,7 +128,7 @@ export default function Contact() {
           onBlur={onBlur}
           
         />
-        <FormErrorMessage>Required</FormErrorMessage>
+
       </FormControl>
 
       <Button
